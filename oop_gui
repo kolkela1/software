@@ -1,0 +1,43 @@
+from tkinter import *
+from tkinter.ttk import Treeview
+class page():
+    def __init__(self,p,text,size):
+        p.withdraw()
+        self.__p=Toplevel(p)
+        self.__p.title(f"{text}")
+        self.__p.geometry(f"{size}")
+        self.__p.resizable(0,0)
+        self.__p.configure(bg="white")
+    def destroy(self,s,other):
+        self.__p.destroy()
+        other=None
+        s.deiconify()
+    
+    
+
+class buttonx():
+    def __init__(self,p,text,x,y,width=20,height=2,font=12):
+        self.__b=Button(p,text=f"{text}",width=width,height=height)
+        self.__b.configure(bg="white",fg="black",font=("Arial",font))
+        self.__b.place(x=x,y=y)
+
+    def set_command(self,command):
+        self.__b.configure(command=command)
+
+
+class treeviewx():
+    def __init__(self,p,x,y,w,coulms,labels,show):
+       self.__t=Treeview(p,columns=coulms,show="headings",selectmode=show)
+       self.__t.place(x=x,y=y)
+       for i in range(len(coulms)):
+           self.__t.heading(coulms[i],text=labels[i])
+           self.__t.column(coulms[i],width=w,anchor="e")
+    def insert(self,value):
+        self.__t.insert(parent="", index="end", iid=value[0], values=value)
+    def delete(self,idd):
+        self.__t.delete(idd)
+    def select(self):
+        return self.__t.selection()
+
+
+
